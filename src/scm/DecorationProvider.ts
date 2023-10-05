@@ -6,8 +6,36 @@ import {
 } from "vscode";
 import { Status } from "./Status";
 import * as path from "path";
-import { getStatusText } from "../test/helpers/testUtils";
 import { isTruthy } from "../TsUtils";
+
+export function getStatusText(status: Status): string {
+    switch (status) {
+        case Status.ADD:
+            return "add";
+        case Status.ARCHIVE:
+            return "archive";
+        case Status.BRANCH:
+            return "branch";
+        case Status.DELETE:
+            return "delete";
+        case Status.EDIT:
+            return "edit";
+        case Status.IMPORT:
+            return "import";
+        case Status.INTEGRATE:
+            return "integrate";
+        case Status.LOCK:
+            return "lock";
+        case Status.MOVE_ADD:
+            return "move/add";
+        case Status.MOVE_DELETE:
+            return "move/delete";
+        case Status.PURGE:
+            return "purge";
+        case Status.UNKNOWN:
+            return "???";
+    }
+}
 
 export class DecorationProvider {
     private static _iconsRootPath: string = path.join(
