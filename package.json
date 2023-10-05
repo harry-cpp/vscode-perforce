@@ -1,22 +1,14 @@
 {
     "name": "perforce",
     "displayName": "Perforce for VS Code",
-    "description": "(2020 Fork) Perforce integration with VS Code's SCM features",
+    "description": "Fork from mjcrouch with less dependencies",
     "version": "4.15.7",
-    "publisher": "mjcrouch",
+    "publisher": "harrycpp",
     "license": "MIT",
     "categories": [
         "SCM Providers"
     ],
     "icon": "icon.png",
-    "bugs": {
-        "url": "https://github.com/mjcrouch/vscode-perforce/issues"
-    },
-    "homepage": "https://github.com/mjcrouch/vscode-perforce/blob/master/README.md",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mjcrouch/vscode-perforce.git"
-    },
     "galleryBanner": {
         "color": "#5c2d91",
         "theme": "dark"
