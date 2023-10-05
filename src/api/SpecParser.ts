@@ -5,9 +5,8 @@ import {
     splitIntoSections,
 } from "./CommandUtils";
 import { RawField } from "./CommonTypes";
-import { pipe } from "@arrows/composition";
 
-const parseRawField = pipe(removeLeadingNewline, splitIntoLines, removeIndent);
+const parseRawField = (value: string) => removeIndent(splitIntoLines(removeLeadingNewline(value)));
 
 function parseRawFields(parts: string[]): RawField[] {
     return parts.map((field) => {
@@ -24,4 +23,4 @@ export const getBasicField = (fields: RawField[], field: string) =>
 const excludeNonFields = (parts: string[]) =>
     parts.filter((part) => !part.startsWith("#") && part !== "");
 
-export const parseSpecOutput = pipe(splitIntoSections, excludeNonFields, parseRawFields);
+export const parseSpecOutput = (value: string) => parseRawFields(excludeNonFields(splitIntoSections(value)));

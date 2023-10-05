@@ -1,4 +1,3 @@
-import { pipe } from "@arrows/composition";
 import {
     concatIfOutputIsDefined,
     flagMapper,
@@ -28,7 +27,7 @@ function mapToChangeFields(rawFields: RawField[]): ChangeSpec {
     };
 }
 
-const parseChangeSpec = pipe(parseSpecOutput, mapToChangeFields);
+const parseChangeSpec = (value: string) => mapToChangeFields(parseSpecOutput(value));
 
 export type ChangeSpecOptions = {
     existingChangelist?: string;

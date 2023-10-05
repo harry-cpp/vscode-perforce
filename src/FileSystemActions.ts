@@ -13,8 +13,6 @@ import {
     FileWillDeleteEvent,
 } from "vscode";
 
-import * as micromatch from "micromatch";
-
 import { Display } from "./Display";
 import { PerforceCommands } from "./PerforceCommands";
 import { PerforceSCMProvider } from "./ScmProvider";
@@ -160,8 +158,10 @@ export default class FileSystemActions {
             const stat = await workspace.fs.stat(uri);
             return stat.type === FileType.Directory;
         } catch (err) {
-            // still try to revert
-            Display.channel.appendLine(err);
+            if (err instanceof Error) {
+                // still try to revert
+                Display.channel.appendLine(err.toString());
+            }
         }
         return false;
     }

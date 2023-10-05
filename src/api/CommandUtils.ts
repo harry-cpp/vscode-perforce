@@ -270,7 +270,9 @@ export async function runPerforceCommand(
         }
         return stdout;
     } catch (err) {
-        Display.showError(err.toString());
+        if (err instanceof Error) {
+            Display.showError(err.toString());
+        }
         throw err;
     }
 }

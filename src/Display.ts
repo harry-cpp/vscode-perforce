@@ -132,7 +132,12 @@ export namespace Display {
             } catch (err) {
                 // file not under client root
                 _statusBarItem.text = "P4: $(circle-slash)";
-                _statusBarItem.tooltip = err.toString();
+                if (err instanceof Error) {
+                    _statusBarItem.tooltip = err.toString();
+                }
+                else {
+                    _statusBarItem.tooltip = "Generic Error";
+                }
                 active = ActiveEditorStatus.NOT_IN_WORKSPACE;
             }
 

@@ -1,4 +1,3 @@
-import { pipe } from "@arrows/composition";
 import {
     flagMapper,
     makeSimpleCommand,
@@ -27,7 +26,7 @@ function mapToJobFields(rawFields: RawField[]): Job {
     };
 }
 
-const parseJobSpec = pipe(parseSpecOutput, mapToJobFields);
+const parseJobSpec = (value: string) => mapToJobFields(parseSpecOutput(value));
 
 export type JobOptions = {
     existingJob?: string;

@@ -231,7 +231,9 @@ abstract class SpecEditor {
             // re-open with new values - old job specs are not valid because of the timestamp
             this.editSpec(resource, newItem ?? item);
         } catch (err) {
-            Display.showImportantError(err);
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 

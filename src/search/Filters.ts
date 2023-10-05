@@ -50,14 +50,15 @@ export abstract class FilterItem<T> extends SelfExpandingTreeItem<any> {
         this._didChangeFilter = new vscode.EventEmitter();
         this._subscriptions.push(this._didChangeFilter);
         this.setValueWithoutEvent(_mementoItem.value);
-    }
-
-    get command(): vscode.Command {
-        return {
+        this.command = {
             command: "perforce.changeSearch.setFilter",
             title: "Set " + this._filter.name,
             arguments: [this],
         };
+        this.tooltip = this._filter.placeHolder;
+        this.contextValue = this._selected?.value !== undefined
+                ? "filterItem-val"
+                : "filterItem-empty";
     }
 
     private setValueWithoutEvent(value?: SearchFilterValue<T>) {
@@ -96,16 +97,6 @@ export abstract class FilterItem<T> extends SelfExpandingTreeItem<any> {
 
     get value() {
         return this._selected?.value;
-    }
-
-    get tooltip() {
-        return this._filter.placeHolder;
-    }
-
-    get contextValue() {
-        return this._selected?.value !== undefined
-            ? "filterItem-val"
-            : "filterItem-empty";
     }
 
     reset(fireFilterUpdate = true) {
@@ -361,14 +352,8 @@ class ClientFilter extends FilterItem<string> {
 export class FileFilterValue extends SelfExpandingTreeItem<any> {
     constructor(path: string) {
         super(path);
-    }
-
-    get contextValue() {
-        return "fileFilter";
-    }
-
-    get iconPath() {
-        return new vscode.ThemeIcon("file");
+        this.contextValue = "fileFilter";
+        this.iconPath = new vscode.ThemeIcon("file");
     }
 
     async edit() {
@@ -391,10 +376,7 @@ export class FileFilterValue extends SelfExpandingTreeItem<any> {
 class FileFilterAdd extends SelfExpandingTreeItem<any> {
     constructor(private _command: vscode.Command) {
         super("Add path...");
-    }
-
-    get command() {
-        return this._command;
+        this.command = this._command;
     }
 }
 
@@ -424,16 +406,13 @@ export class FileFilterRoot extends SelfExpandingTreeItem<
         this._didChangeFilter = new vscode.EventEmitter();
         this._subscriptions.push(this._didChangeFilter);
         this.loadFromMemento();
+        this.contextValue = "fileFilters";
     }
 
     private loadFromMemento() {
         this._memento.value?.forEach((saved) =>
             this.addSelectedFilterWithoutEvent(new FileFilterValue(saved))
         );
-    }
-
-    get contextValue() {
-        return "fileFilters";
     }
 
     private async getFilePathFromClipboard() {

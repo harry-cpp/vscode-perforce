@@ -375,7 +375,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             Display.channel.append(created.rawOutput);
             this.Refresh();
         } catch (err) {
-            Display.showError(err.toString());
+            if (err instanceof Error) {
+                Display.showError(err.toString());
+            }
         }
 
         return newChangelistNumber;
@@ -391,7 +393,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             });
             return created.chnum;
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -460,7 +464,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
                 throw new Error("The default changelist is empty");
             }
         } catch (err) {
-            Display.showError(err.toString());
+            if (err instanceof Error) {
+                Display.showError(err.toString());
+            }
             return;
         }
 
@@ -682,7 +688,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             }
             Display.showMessage("Changelist shelved");
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
         this.Refresh();
     }
@@ -721,7 +729,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             }
             Display.showMessage("Changelist unshelved");
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -747,7 +757,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             this.Refresh();
             Display.showMessage("Shelved files deleted");
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -871,8 +883,10 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
         const promises = input.map((r) => this.shelveOpenFile(r));
         try {
             await Promise.all(promises);
-        } catch (reason) {
-            Display.showImportantError(reason.toString());
+        } catch (err) {
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
             this.Refresh();
         }
     }
@@ -887,8 +901,10 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
         const promises = input.map((r) => this.unshelveShelvedFile(r));
         try {
             await Promise.all(promises);
-        } catch (reason) {
-            Display.showImportantError(reason.toString());
+        } catch (err) {
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
             this.Refresh();
         }
     }
@@ -916,7 +932,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             this.Refresh();
             Display.showMessage(ret);
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -947,7 +965,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             this.Refresh();
             Display.showMessage("Job " + jobId + " added");
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -1002,7 +1022,9 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             this.Refresh();
             Display.showMessage("Job " + jobId + " removed");
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -1079,8 +1101,10 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
                 files: resources.map((resource) => resource.actionUriNoRev),
             });
             Display.channel.append(output);
-        } catch (reason) {
-            Display.showImportantError(reason.toString());
+        } catch (err) {
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
         this.Refresh();
     }
@@ -1118,8 +1142,10 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             });
             Display.channel.append(output);
             this.Refresh();
-        } catch (reason) {
-            Display.showImportantError(reason.toString());
+        } catch (err) {
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 

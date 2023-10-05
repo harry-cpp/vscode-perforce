@@ -15,10 +15,10 @@ import { Display } from "./Display";
 import { PerforceSCMProvider } from "./ScmProvider";
 
 import * as CP from "child_process";
-import spawn from "cross-spawn";
 import { CommandLimiter } from "./CommandLimiter";
 import * as Path from "path";
 import { configAccessor } from "./ConfigService";
+import { spawn } from 'node:child_process';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace PerforceService {
@@ -286,7 +286,7 @@ export namespace PerforceService {
             };
         });
         const exec = new ShellExecution(cmd, quotedArgs, {
-            cwd: spawnArgs.cwd,
+            cwd: spawnArgs.cwd?.toString(),
             env,
         });
         try {
@@ -304,7 +304,12 @@ export namespace PerforceService {
                 }
             });
         } catch (err) {
-            responseCallback(err, "", "");
+            if (err instanceof Error) {
+                responseCallback(err, "", "");
+            }
+            else {
+                responseCallback(null, "", "");
+            }
         }
     }
 

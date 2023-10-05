@@ -134,8 +134,10 @@ export namespace PerforceCommands {
                     () => p4edit(activeFile.uri)
                 );
             } catch (err) {
-                // ensure save always happens even if something goes wrong
-                Display.showError(err);
+                if (err instanceof Error) {
+                    // ensure save always happens even if something goes wrong
+                    Display.showError(err.toString());
+                }
             }
 
             await activeFile.save();
@@ -344,7 +346,9 @@ export namespace PerforceCommands {
             await p4.edit.ignoringAndHidingStdErr(file, { files: [fromWild] });
             await p4.move(file, { fromToFile: [fromWild, toWild] });
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -353,7 +357,9 @@ export namespace PerforceCommands {
             await p4.edit.ignoringAndHidingStdErr(file, { files: [file] });
             await p4.move(file, { fromToFile: [file, newFsPath] });
         } catch (err) {
-            Display.showImportantError(err.toString());
+            if (err instanceof Error) {
+                Display.showImportantError(err.toString());
+            }
         }
     }
 
@@ -395,7 +401,9 @@ export namespace PerforceCommands {
             try {
                 await withExplorerProgress(() => Promise.all(promises));
             } catch (err) {
-                Display.showImportantError(err.toString());
+                if (err instanceof Error) {
+                    Display.showImportantError(err.toString());
+                }
             }
             PerforceSCMProvider.RefreshAll();
         }
@@ -420,7 +428,9 @@ export namespace PerforceCommands {
                     await window.showTextDocument(Uri.file(newPath));
                 }
             } catch (err) {
-                Display.showImportantError(err.toString());
+                if (err instanceof Error) {
+                    Display.showImportantError(err.toString());
+                }
             }
             PerforceSCMProvider.RefreshAll();
         }
@@ -483,7 +493,9 @@ export namespace PerforceCommands {
                     );
                 } catch (err) {
                     if (!options?.hideSubErrors) {
-                        Display.showImportantError(err);
+                        if (err instanceof Error) {
+                            Display.showImportantError(err.toString());
+                        }
                     }
                     throw err;
                 } finally {
