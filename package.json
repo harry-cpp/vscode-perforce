@@ -14,16 +14,15 @@
         "theme": "dark"
     },
     "engines": {
-        "vscode": "^1.53.0"
+        "vscode": "^1.81.0"
     },
-    "enableProposedApi": false,
     "keywords": [
         "vscode",
         "scm",
         "perforce",
         "multi-root ready"
     ],
-    "main": "./dist/extension",
+    "main": "./out/extension.js",
     "activationEvents": [
         "*"
     ],
