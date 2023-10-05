@@ -202,7 +202,7 @@ A few quality of life improvements to quick picks and searching
 
 **Possible breaking changes in this release!** - this is the main reason for the major version update to v4. The possible breaking changes are mainly around the use of P4CONFIG files.
 
-To mitigate this, the perforce output log has been improved with much more detail, the readme has been rewritten with a new [setup](README.md#setup) section, and a [migration guide](MIGRATION.md) has been created with details about the changes, in case there are any issues. If you are still having problems, please [search for or raise an issue](https://github.com/mjcrouch/vscode-perforce/issues)
+To mitigate this, the perforce output log has been improved with much more detail, the readme has been rewritten with a new setup section, and a migration guide has been created with details about the changes, in case there are any issues. If you are still having problems, please [search for or raise an issue](https://github.com/mjcrouch/vscode-perforce/issues)
 
 ### Activation Changes (#41)
 
@@ -227,7 +227,7 @@ Otherwise, this version *should* be backward compatible. The following changes h
 ### Other Changes
 
 * Add diff next / previous arrows in the editor title bar (#67). This allows you to click through revisions. Behaviour for these icons can be changed with the setting `perforce.editorButtons.diffPrevAndNext`
-* Add [file and changelist quick pick](Readme.md#New-revision-&-changelist-quick-pick) (#66) to see and navigate through more information about:
+* Add file and changelist quick pick (#66) to see and navigate through more information about:
   * the depot revision you are viewing
   * the details of the changelist, and the other files in the changelist
   * integrations to and from the revision
