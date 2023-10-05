@@ -11,7 +11,7 @@ import * as ChangeQuickPick from "./ChangeQuickPick";
 
 import * as qp from "./QuickPickProvider";
 import { showIntegPickForFile } from "./IntegrationQuickPick";
-import { timeAgo, toReadableDateTime } from "../DateFormatter";
+import { toReadableDateTime } from "../DateFormatter";
 import * as Path from "path";
 
 const nbsp = "\xa0";
@@ -161,7 +161,7 @@ function makeShortSummary(change: p4.FileLogItem) {
     return (
         "#" +
         change.revision +
-        (change.date ? "  $(calendar) " + timeAgo.format(change.date) : "") +
+        (change.date ? "  $(calendar) " + change.date.toString() : "") +
         " $(person) " +
         change.user +
         " $(circle-filled) " +

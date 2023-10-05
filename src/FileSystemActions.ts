@@ -179,11 +179,14 @@ export default class FileSystemActions {
     }
 
     private static shouldExclude(uri: Uri): boolean {
+        /* TODO: FIXME
         const fileExcludes = Object.keys(workspace.getConfiguration("files").exclude);
 
         return micromatch.isMatch(uri.fsPath, fileExcludes, {
             dot: true,
-        });
+        });*/
+
+        return false;
     }
 
     private static onFilesDeleted(filesDeleted: FileWillDeleteEvent) {

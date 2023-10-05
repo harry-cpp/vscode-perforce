@@ -1,10 +1,4 @@
-import TimeAgo from "javascript-time-ago";
-import * as en from "javascript-time-ago/locale/en";
 import * as vscode from "vscode";
-
-TimeAgo.addLocale(en);
-
-export const timeAgo = new TimeAgo("en-US");
 
 export function toReadableDateTime(date?: Date) {
     if (!date) {

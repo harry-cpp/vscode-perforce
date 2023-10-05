@@ -1,6 +1,5 @@
 import * as p4 from "../api/PerforceApi";
 
-import { timeAgo } from "../DateFormatter";
 import { Display } from "../Display";
 import { isTruthy } from "../TsUtils";
 
@@ -65,7 +64,7 @@ const behaviors: ColumnBehaviors = {
         value: (change) => replaceWhitespace(change.description),
     },
     timeAgo: {
-        value: (change) => (change.date ? timeAgo.format(change.date) : "Unknown"),
+        value: (change) => (change.date ? change.date.toString() : "Unknown"),
     },
 };
 
