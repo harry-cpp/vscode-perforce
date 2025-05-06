@@ -420,7 +420,7 @@ export class Model implements Disposable, vscode.FileDecorationProvider {
             existingChangelist: id,
         });
 
-        this._sourceControl.inputBox.value = "#" + id + "\n" + change.description ?? "";
+        this._sourceControl.inputBox.value = "#" + id + "\n" + change.description;
     }
 
     public async EditChangeSpec(input: ResourceGroup): Promise<void> {
