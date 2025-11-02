@@ -37,7 +37,11 @@ export default class FileSystemActions {
     constructor(workspace: FileSystemEventProvider) {
         const subscriptions: Disposable[] = [];
 
-        if (PerforceCommands.checkFolderOpened()) {
+        const config = configAccessor;
+        if (
+            config.enableFileSystemActionsWithoutFolder ||
+            PerforceCommands.checkFolderOpened()
+        ) {
             FileSystemActions.registerEvents(workspace);
         }
 
